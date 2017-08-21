@@ -1,0 +1,42 @@
+<html>
+<head>
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+   integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+   crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+   integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+   crossorigin=""></script>
+</head>
+<body>
+<div id='map' style='height:100%'></div>
+<script src='center.js'></script>
+<script src='path.js'></script>
+
+<script>
+  var mappy = L.map('map').setView([37.5, -89], 5);
+  var OpenStreetMap_Mapnik = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(mappy);
+
+  L.geoJson(path).addTo(mappy);
+  L.geoJson(center).addTo(mappy);
+
+  var dot;
+
+  mappy.locate({watch:true, setView:true}).on('locationfound', function(e) {
+    if (!dot) {
+      dot = L.circleMarker(e.latlng, {
+        color: 'white',
+        fillColor: 'red',
+        fillOpacity: 1
+      }).addTo(mappy);
+    } else {
+      dot.setLatLng(e.latlng)
+    }
+  });
+
+
+</script>
+</body>
+</html>
