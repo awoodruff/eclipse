@@ -7,8 +7,9 @@
    integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
    crossorigin=""></script>
 </head>
-<body>
+<body style='margin: 0'>
 <div id='map' style='height:100%'></div>
+<div id='locate' style='position: absolute; top: 20px; right: 20px; background-color: white; border: 1px solid #999; padding: 5px; z-index: 500; cursor: pointer; font-family: sans-serif;'>Locate</div>
 <script src='center.js'></script>
 <script src='path.js'></script>
 
@@ -36,6 +37,9 @@
     }
   });
 
+  document.getElementById('locate').onclick = function() {
+    mappy.locate();
+  }
 
 </script>
 </body>
